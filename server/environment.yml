@@ -1,0 +1,21 @@
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - pip
+  - python
+  - ipython
+  - django
+  - psycopg2
+  - gunicorn
+  - pytest
+  - pytest-django
+  - pandas
+  - xlrd
+  - ujson
+  - pip:
+    - dynamic-rest
+    - djangorestframework-jwt
+    - django-cors-headers
+    - django-simple-history
+prefix: /anaconda3/envs/ci_practice
