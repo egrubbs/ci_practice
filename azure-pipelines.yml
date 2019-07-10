@@ -68,5 +68,6 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: pytest-cov
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
+    summaryFileLocation: '**/coverage.xml'
+    reportDirectory: '**/htmlcov'
+  condition: succeededOrFailed()
