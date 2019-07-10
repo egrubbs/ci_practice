@@ -67,7 +67,8 @@ steps:
 
 - task: PublishCodeCoverageResults@1
   inputs:
-    codeCoverageTool: pytest-cov
+    # pytest-cov creates a coverage.xml file in the same format as Cobertura.
+    codeCoverageTool: Cobertura
     summaryFileLocation: '**/coverage.xml'
     reportDirectory: '**/htmlcov'
   condition: succeededOrFailed()
