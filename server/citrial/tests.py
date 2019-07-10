@@ -10,4 +10,6 @@ class TestPractice(TestCase):
 
 
 def test_pytest_testfinder():
+    from citrial.models import foo
+    foo()
     assert 1 == 0
