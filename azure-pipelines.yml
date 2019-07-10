@@ -55,7 +55,8 @@ steps:
     pushd '$(projectRoot)'
     source /home/vsts/miniconda3/etc/profile.d/conda.sh
     conda activate
-    python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
+    #python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
+    pytest -vv
   displayName: 'Run tests'
 
 - task: PublishTestResults@2
