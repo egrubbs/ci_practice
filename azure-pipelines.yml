@@ -44,7 +44,7 @@ steps:
     wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
     bash Miniconda3-latest-Linux-x86_64.sh -b
     source $HOME/miniconda3/bin/activate
-    conda env update -q -f server/environment.yml
+    conda env update -q -f server/environment.yml > /dev/null
     source /home/vsts/miniconda3/etc/profile.d/conda.sh
     conda activate
     python -m pip install --upgrade pip setuptools wheel
@@ -53,6 +53,8 @@ steps:
 
 - script: |
     pushd '$(projectRoot)'
+    source /home/vsts/miniconda3/etc/profile.d/conda.sh
+    conda activate
     python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
   displayName: 'Run tests'
 
