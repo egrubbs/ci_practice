@@ -9,13 +9,17 @@ trigger:
 pool:
   name: TradeMetrics-Build
 
+strategy:
+  matrix:
+    Python37:
+      PYTHON_VERSION: '3.7'
+
 variables:
   DEBIAN_FRONTEND: 'noninteractive'
 
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '$(PYTHON_VERSION)'
     architecture: 'x64'
 
 - task: PythonScript@0
