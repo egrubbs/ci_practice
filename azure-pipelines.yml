@@ -19,9 +19,6 @@ variables:
   DEBIAN_FRONTEND: 'noninteractive'
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    architecture: 'x64'
 
 - task: PythonScript@0
   displayName: 'Export project path'
