@@ -13,6 +13,7 @@ strategy:
   matrix:
     Python37:
       PYTHON_VERSION: '3.7'
+  maxParallel: 3
 
 variables:
   DEBIAN_FRONTEND: 'noninteractive'
