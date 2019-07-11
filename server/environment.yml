@@ -10,6 +10,8 @@ dependencies:
   - gunicorn
   - pytest
   - pytest-django
+  - pytest-azurepipelines
+  - pytest-cov
   - pandas
   - xlrd
   - ujson

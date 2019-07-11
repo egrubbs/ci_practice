@@ -10,11 +10,12 @@ pool:
   name: TradeMetrics-Build
 strategy:
   matrix:
-    Python35:
-      PYTHON_VERSION: '3.5'
     Python37:
       PYTHON_VERSION: '3.7'
   maxParallel: 3
+
+variables:
+  DEBIAN_FRONTEND: 'noninteractive'
 
 steps:
 - task: UsePythonVersion@0
@@ -39,18 +40,35 @@ steps:
       print('##vso[task.setvariable variable=projectRoot]{}'.format(project_location))
 
 - script: |
+    DEBIAN_FRONTEND=noninteractive sudo apt install -y wget
+    wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b
+    source $HOME/miniconda3/bin/activate
+    conda env update -q -f server/environment.yml > /dev/null
+    source /home/vsts/miniconda3/etc/profile.d/conda.sh
+    conda activate
     python -m pip install --upgrade pip setuptools wheel
-    pip install -r requirements.txt
     pip install unittest-xml-reporting
   displayName: 'Install prerequisites'
 
 - script: |
     pushd '$(projectRoot)'
-    python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
+    source /home/vsts/miniconda3/etc/profile.d/conda.sh
+    conda activate
+    #python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
+    pytest -vv
   displayName: 'Run tests'
 
 - task: PublishTestResults@2
   inputs:
-    testResultsFiles: "**/TEST-*.xml"
+    testResultsFiles: "**/test-*.xml"
     testRunTitle: 'Python $(PYTHON_VERSION)'
+  condition: succeededOrFailed()
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    # pytest-cov creates a coverage.xml file in the same format as Cobertura.
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '**/coverage.xml'
+    reportDirectory: '**/htmlcov'
   condition: succeededOrFailed()
