@@ -24,8 +24,7 @@ steps:
 - script: |
     echo "Just a placeholder for testing conditions"
   displayName: "Expected skipping"
-  condition: |
-    startsWith(variables['Build.SourceBranchName'], 'onetwothreefourfivesixseveneightnineteneleventwelve+onetwothreefourfivesixseveneightnineteneleventwelve+onetwothreefourfivesixseveneightnineteneleventwelve+onetwothreefourfivesixseveneightnineteneleventwelve+onetwothreefourfivesixseveneightnineteneleventwelve')
+  condition: startsWith('no match', 012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789')
 
 - script: |
     echo "Just a placeholder for testing conditions"
