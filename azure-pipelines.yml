@@ -25,10 +25,7 @@ steps:
     echo "Just a placeholder for testing conditions"
   displayName: "Expected skipping"
   condition: |
-    startsWith(
-      variables['Build.SourceBranchName'],
-      'onetwothreefourfivesixseveneightnineteneleventwelve'
-    )
+    startsWith(variables['Build.SourceBranchName'], 'onetwothreefourfivesixseveneightnineteneleventwelve')
 
 - script: |
     echo "Just a placeholder for testing conditions"
@@ -90,7 +87,7 @@ steps:
 
 - script: |
     pushd '$(projectRoot)'
-    python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
+    #python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
   displayName: 'Run tests'
 
 - task: PublishTestResults@2
