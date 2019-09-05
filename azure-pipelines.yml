@@ -10,8 +10,8 @@ pool:
   vmImage: 'ubuntu-16.04'
 strategy:
   matrix:
-    Python35:
-      PYTHON_VERSION: '3.5'
+    #Python35:
+    #  PYTHON_VERSION: '3.5'
     Python37:
       PYTHON_VERSION: '3.7'
   maxParallel: 3
@@ -20,6 +20,39 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '$(PYTHON_VERSION)'
+
+- script: |
+    echo "Just a placeholder for testing conditions"
+  displayName: "Expected skipping"
+  condition: |
+    and(
+      succeededOrFailed(),
+      or(
+        False,
+        0,
+        startsWith(variables['Build.SourceBranchName'], 'one'),
+        startsWith(variables['Build.SourceBranchName'], 'two'),
+        startsWith(variables['Build.SourceBranchName'], 'three'),
+        startsWith(variables['Build.SourceBranchName'], 'four')
+      )
+    )
+
+- script: |
+    echo "Just a placeholder for testing conditions"
+  displayName: "Expected processing"
+  condition: |
+    and(
+      succeededOrFailed(),
+      or(
+        False,
+        0,
+        startsWith(variables['Build.SourceBranchName'], 'one'),
+        startsWith(variables['Build.SourceBranchName'], 'two'),
+        startsWith(variables['Build.SourceBranchName'], 'three'),
+        startsWith(variables['Build.SourceBranchName'], 'master')
+      )
+    )
+
 
 - task: PythonScript@0
   displayName: 'Export project path'
@@ -57,7 +90,7 @@ steps:
       or(
         False,
         0,
-        False
+        True
       )
     )
 
