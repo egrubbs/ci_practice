@@ -37,12 +37,30 @@ steps:
       project_location = path.dirname(path.abspath(manage_py))
       print('Found Django project in', project_location)
       print('##vso[task.setvariable variable=projectRoot]{}'.format(project_location))
+  condition: |
+    and(
+      succeededOrFailed(),
+      or(
+        False,
+        0,
+        True,
+      )
+    )
 
 - script: |
     python -m pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt
     pip install unittest-xml-reporting
   displayName: 'Install prerequisites'
+    condition: |
+    and(
+      succeededOrFailed(),
+      or(
+        False,
+        0,
+        False,
+      )
+    )
 
 - script: |
     pushd '$(projectRoot)'
@@ -53,4 +71,12 @@ steps:
   inputs:
     testResultsFiles: "**/TEST-*.xml"
     testRunTitle: 'Python $(PYTHON_VERSION)'
-  condition: succeededOrFailed()
+  condition: |
+    and(
+      succeededOrFailed(),
+      or(
+        False,
+        0,
+        False,
+      )
+    )
