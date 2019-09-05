@@ -30,7 +30,7 @@ steps:
       or(
         False,
         0,
-        startsWith(variables['Build.SourceBranchName'], 'one'),
+        startsWith(variables['Build.SourceBranchName'], 'onetwothreefourfivesixseveneightnineteneleventwelve'),
         startsWith(variables['Build.SourceBranchName'], 'two'),
         startsWith(variables['Build.SourceBranchName'], 'three'),
         startsWith(variables['Build.SourceBranchName'], 'four')
