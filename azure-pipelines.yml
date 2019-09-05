@@ -43,7 +43,7 @@ steps:
       or(
         False,
         0,
-        True,
+        True
       )
     )
 
@@ -58,7 +58,7 @@ steps:
       or(
         False,
         0,
-        False,
+        False
       )
     )
 
@@ -77,6 +77,6 @@ steps:
       or(
         False,
         0,
-        False,
+        False
       )
     )
