@@ -25,7 +25,7 @@ steps:
     echo "Just a placeholder for testing conditions"
   displayName: "Expected skipping"
   condition: |
-    startsWith(variables['Build.SourceBranchName'], 'onetwothreefourfivesixseveneightnineteneleventwelve')
+    startsWith(variables['Build.SourceBranchName'], 'onetwothreefourfivesixseveneightnineteneleventwelve+onetwothreefourfivesixseveneightnineteneleventwelve+onetwothreefourfivesixseveneightnineteneleventwelve+onetwothreefourfivesixseveneightnineteneleventwelve+onetwothreefourfivesixseveneightnineteneleventwelve')
 
 - script: |
     echo "Just a placeholder for testing conditions"
