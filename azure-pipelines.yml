@@ -25,17 +25,9 @@ steps:
     echo "Just a placeholder for testing conditions"
   displayName: "Expected skipping"
   condition: |
-    and(
-      succeededOrFailed(),
-      or(
-        False,
-        0,
-        startsWith(variables['Build.SourceBranchName'],
-          'onetwothreefourfivesixseveneightnineteneleventwelve'),
-        startsWith(variables['Build.SourceBranchName'], 'two'),
-        startsWith(variables['Build.SourceBranchName'], 'three'),
-        startsWith(variables['Build.SourceBranchName'], 'four')
-      )
+    startsWith(
+      variables['Build.SourceBranchName'],
+      'onetwothreefourfivesixseveneightnineteneleventwelve'
     )
 
 - script: |
