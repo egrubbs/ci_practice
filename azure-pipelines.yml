@@ -7,7 +7,9 @@ trigger:
 - master
 
 pool:
-  name: TradeMetrics-Build
+  #name: TradeMetrics-Build
+  vmImage: 'ubuntu-latest'
+
 
 strategy:
   matrix:
