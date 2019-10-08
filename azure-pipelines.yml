@@ -28,7 +28,7 @@ steps:
     echo "DEBIAN_FRONTEND=$DEBIAN_FRONTEND" 
   displayName: 'Display env'
   env:
-    TESTPATH: '$System.DefaultWorkingDirectory)/fakebin'
+    TESTPATH: '$(System.DefaultWorkingDirectory)/fakebin'
 
 - script: |
     env | sort
@@ -38,7 +38,7 @@ steps:
     pwd
   displayName: 'Test script task'
   env:
-    PATH: '$System.DefaultWorkingDirectory)/fakebin'
+    PATH: '$(System.DefaultWorkingDirectory)/fakebin'
 
 - script: |
     DEBIAN_FRONTEND=noninteractive apt update
