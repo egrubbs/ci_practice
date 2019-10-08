@@ -38,7 +38,7 @@ steps:
     pwd
   displayName: 'Test script task'
   env:
-    PATH: '$(System.DefaultWorkingDirectory)/fakebin'
+      PATH: '$(System.DefaultWorkingDirectory)/fakebin:/usr/share/rust/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
 
 - script: |
     DEBIAN_FRONTEND=noninteractive apt update
