@@ -19,16 +19,26 @@ strategy:
 
 variables:
   DEBIAN_FRONTEND: 'noninteractive'
-  PATH: '$System.DefaultWorkingDirectory)/fakebin'
 
 steps:
 
 - script: |
+    env | sort
+    echo "TESTPATH=$TESTPATH" 
+    echo "DEBIAN_FRONTEND=$DEBIAN_FRONTEND" 
+  displayName: 'Display env'
+  env:
+    TESTPATH: '$System.DefaultWorkingDirectory)/fakebin'
+
+- script: |
+    env | sort
     echo "Test script"
     date
     ls
     pwd
   displayName: 'Test script task'
+  env:
+    PATH: '$System.DefaultWorkingDirectory)/fakebin'
 
 - script: |
     DEBIAN_FRONTEND=noninteractive apt update
