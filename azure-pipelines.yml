@@ -17,8 +17,16 @@ strategy:
 
 variables:
   DEBIAN_FRONTEND: 'noninteractive'
+  PATH: '$System.DefaultWorkingDirectory)/fakebin'
 
 steps:
+
+- script: |
+    echo "Test script"
+    date
+    ls
+    pwd
+  displayName: 'Test script task'
 
 - script: |
     DEBIAN_FRONTEND=noninteractive apt update

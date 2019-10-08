@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -x
+echo "OVERRIDE bash interpreter"
+echo "ARGS: $0 $*"
+echo "PWD: $PWD"
+echo "PATH=$PATH"
+which bash
+PATH=/bin:/usr/bin
+echo "new PATH=$PATH"
+which bash
