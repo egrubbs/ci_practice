@@ -10,9 +10,20 @@ PATH=/bin:/usr/bin
 echo "new PATH=$PATH"
 which bash
 cd /usr
+echo "Arg count: $#"
+start_args=${@:1:$[ $# - 1 ]}
+echo "All but last arg: $start_args"
+last_arg=${@:$#:$[ $# + 1 ]}
+echo "Last arg: $last_arg"
+
+# Bash does not allow "GNU long options" such as "--norc"
+# to be after short options such as "-x".
 echo "Do not execute, just evaluate:"
-/bin/bash -nv $*
+/bin/bash $start_args -nv $last_arg
+
 echo "Execute without GLOB support:"
-/bin/bash -xf $*
+/bin/bash $start_args -xf $last_arg
+
 echo "Execute with GLOB support:"
-/bin/bash -x $*
+/bin/bash $start_args -x $last_arg
+
