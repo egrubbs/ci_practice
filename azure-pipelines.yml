@@ -23,7 +23,13 @@ variables:
 steps:
 
 - script: |
-    env | sort
+    set -x
+    # The total size of the env variables must be less than ARG_MAX
+    # or you will get an "Argument list too long" error.
+    # This is normally 2097152 bytes (2,048 KB). A single env variable
+    # is must be no greater than 1/16 of ARG_MAX or 128 KB.
+    getconf ARG_MAX
+    env | wc -c
     echo "TESTPATH=$TESTPATH" 
     echo "DEBIAN_FRONTEND=$DEBIAN_FRONTEND" 
   displayName: 'Display env'
@@ -31,14 +37,13 @@ steps:
     TESTPATH: '$(System.DefaultWorkingDirectory)/fakebin'
 
 - script: |
-    env | sort
     echo "Test script"
     date
     ls
     pwd
   displayName: 'Test script task'
   env:
-      PATH: '$(System.DefaultWorkingDirectory)/fakebin:/usr/share/rust/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    PATH: '$(System.DefaultWorkingDirectory)/fakebin:/usr/share/rust/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
 
 - script: |
     DEBIAN_FRONTEND=noninteractive apt update
