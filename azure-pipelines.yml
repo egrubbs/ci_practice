@@ -41,6 +41,9 @@ steps:
     date
     ls
     pwd
+    which env
+    echo "GLOB TEST:" *
+    env | sort
   displayName: 'Test script task'
   env:
     PATH: '$(System.DefaultWorkingDirectory)/fakebin:/usr/share/rust/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'

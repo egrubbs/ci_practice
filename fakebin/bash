@@ -5,8 +5,14 @@ echo "OVERRIDE bash interpreter"
 echo "ARGS: $0 $*"
 echo "PWD: $PWD"
 echo "PATH=$PATH"
-set | sort
 which bash
 PATH=/bin:/usr/bin
 echo "new PATH=$PATH"
 which bash
+cd /usr
+echo "Do not execute, just evaluate:"
+/bin/bash -nv $*
+echo "Execute without GLOB support:"
+/bin/bash -xf $*
+echo "Execute with GLOB support:"
+/bin/bash -x $*
