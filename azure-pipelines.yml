@@ -97,9 +97,5 @@ steps:
   condition: |
     and(
       succeededOrFailed(),
-      or(
-        False,
-        0,
-        False
-      )
+      True
     )
