@@ -70,32 +70,38 @@ steps:
       )
     )
 
-- script: |
-    python -m pip install --upgrade pip setuptools wheel
-    pip install -r requirements.txt
-    pip install unittest-xml-reporting
-  displayName: 'Install prerequisites'
-  condition: |
-    and(
-      succeededOrFailed(),
-      or(
-        False,
-        0,
-        True
-      )
-    )
+#- script: |
+#    python -m pip install --upgrade pip setuptools wheel
+#    pip install -r requirements.txt
+#    pip install unittest-xml-reporting
+#  displayName: 'Install prerequisites'
+#  condition: |
+#    and(
+#      succeededOrFailed(),
+#      or(
+#        False,
+#        0,
+#        True
+#      )
+#    )
+#
+#- script: |
+#    pushd '$(projectRoot)'
+#    python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
+#  displayName: 'Run tests'
+#
+#- task: PublishTestResults@2
+#  inputs:
+#    testResultsFiles: "**/TEST-*.xml"
+#    testRunTitle: 'Python $(PYTHON_VERSION)'
+#  condition: |
+#    and(
+#      succeededOrFailed(),
+#      True
+#    )
 
 - script: |
-    pushd '$(projectRoot)'
-    #python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
-  displayName: 'Run tests'
-
-- task: PublishTestResults@2
-  inputs:
-    testResultsFiles: "**/TEST-*.xml"
-    testRunTitle: 'Python $(PYTHON_VERSION)'
-  condition: |
-    and(
-      succeededOrFailed(),
-      True
-    )
+    env | sort
+    set -x -e
+    ./publish_tests.py 100
+  displayName: 'Publish tests to trigger cancel job bug'
