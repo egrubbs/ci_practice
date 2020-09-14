@@ -104,4 +104,5 @@ steps:
     env | sort
     set -x -e
     ./publish_tests.py 100
+    exit 3
   displayName: 'Publish tests to trigger cancel job bug'
