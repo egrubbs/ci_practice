@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import sys
 
 count = int(sys.argv[1])
@@ -13,9 +14,9 @@ test_output_template = '''
 </testsuites>
 '''
 
-
+d = os.environ.get('SYSTEM_DEFAULTWORKINGDIRECTORY', '')
 for i in range(count):
-    filename = 'test-{}.xml'.format(i)
+    filename = os.path.join(d, 'test-{}.xml'.format(i))
     open(filename, 'w').write(test_output_template.format(i))
     print(
         "##vso[results.publish type=JUnit;runTitle='Some Test {}';]{}".format(
